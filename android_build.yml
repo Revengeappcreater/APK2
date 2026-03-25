@@ -1,0 +1,15 @@
+      - name: Build APK
+        run: |
+          npx cap init "MyClothingApp" com.rushikesh.app --web-dir .
+          npx cap add android
+          npx cap copy
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: My-Clothing-App-APK
+          path: android/app/build/outputs/apk/debug/app-debug.apk
+          
